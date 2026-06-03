@@ -1,337 +1,350 @@
 import * as Icons from './vis-bug.icons'
 import { metaKey, altKey } from '../../utilities/'
+import { t, initLanguage, getLanguage } from '../../utilities/i18n'
+
+// 初始化语言
+initLanguage()
 
 export const VisBugModel = {
   g: {
     tool:        'guides',
     icon:        Icons.guides,
-    label:       '<span><u>G</u>uides</span>',
-    description: 'Verify alignment & measure distances',
-    instruction: `<div table>
-                    <div>
-                      <b>Element Guides:</b>
-                      <span>hover</span>
-                    </div>
-                    <div>
-                      <b>Measure:</b>
-                      <span>click+hover</span>
-                    </div>
-                    <div>
-                      <b>Measure many:</b>
-                      <span>shift+click</span>
-                    </div>
-                    <div>
-                      <b>Clear:</b>
-                      <span>esc</span>
-                    </div>
-                  </div>`,
+    get label() { return t('guides.label') },
+    get description() { return t('guides.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('guides.element_guides')}</b>
+                  <span>${t('guides.hover')}</span>
+                </div>
+                <div>
+                  <b>${t('guides.measure')}</b>
+                  <span>${t('guides.click_hover')}</span>
+                </div>
+                <div>
+                  <b>${t('guides.measure_many')}</b>
+                  <span>${t('guides.shift_click')}</span>
+                </div>
+                <div>
+                  <b>${t('guides.clear')}</b>
+                  <span>${t('guides.esc')}</span>
+                </div>
+              </div>` 
+    },
   },
   i: {
     tool:        'inspector',
     icon:        Icons.inspector,
-    label:       '<span><u>I</u>nspect</span>',
-    description: 'Inspect the common styles of an element',
-    instruction: `<div table>
-                    <div>
-                      <b>Pin it:</b>
-                      <span>click</span>
-                    </div>
-                    <div>
-                      <b>Pin many:</b>
-                      <span>shift+click</span>
-                    </div>
-                    <div>
-                      <b>Position it:</b>
-                      <span>click & drag by the header area</span>
-                    </div>
-                    <div>
-                      <b>Clear:</b>
-                      <span>esc</span>
-                    </div>
-                  </div>`,
+    get label() { return t('inspector.label') },
+    get description() { return t('inspector.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('inspector.pin_it')}</b>
+                  <span>${t('inspector.click')}</span>
+                </div>
+                <div>
+                  <b>${t('inspector.pin_many')}</b>
+                  <span>${t('inspector.shift_click')}</span>
+                </div>
+                <div>
+                  <b>${t('inspector.position_it')}</b>
+                  <span>${t('inspector.click_drag')}</span>
+                </div>
+                <div>
+                  <b>${t('guides.clear')}</b>
+                  <span>${t('guides.esc')}</span>
+                </div>
+              </div>`
+    },
   },
   x: {
     tool:        'accessibility',
     icon:        Icons.accessibility,
-    label:       'Accessibility',
-    description: 'Inspect attributes & contrast compliance',
-    instruction: `<div table>
-                    <div>
-                      <b>Pin it:</b>
-                      <span>click</span>
-                    </div>
-                    <div>
-                      <b>Pin many:</b>
-                      <span>shift+click</span>
-                    </div>
-                    <div>
-                      <b>Clear:</b>
-                      <span>esc</span>
-                    </div>
-                  </div>`,
+    get label() { return t('accessibility.label') },
+    get description() { return t('accessibility.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('inspector.pin_it')}</b>
+                  <span>${t('inspector.click')}</span>
+                </div>
+                <div>
+                  <b>${t('inspector.pin_many')}</b>
+                  <span>${t('inspector.shift_click')}</span>
+                </div>
+                <div>
+                  <b>${t('guides.clear')}</b>
+                  <span>${t('guides.esc')}</span>
+                </div>
+              </div>`
+    },
   },
   l: {
     tool:        'position',
     icon:        Icons.position,
-    label:       'Position',
-    description: 'Grab and position elements anywhere',
-    instruction: `<div table>
-                    <div>
-                      <b>Nudge:</b>
-                      <span>◀ ▶ ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Place:</b>
-                      <span>Click & drag</span>
-                    </div>
-                    <div>
-                      <b>Restore:</b>
-                      <span>${altKey} + delete</span>
-                    </div>
-                  </div>`,
+    get label() { return t('position.label') },
+    get description() { return t('position.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('position.nudge')}</b>
+                  <span>${t('position.arrows')}</span>
+                </div>
+                <div>
+                  <b>${t('position.place')}</b>
+                  <span>${t('position.click_drag')}</span>
+                </div>
+                <div>
+                  <b>${t('position.restore')}</b>
+                  <span>${altKey} + delete</span>
+                </div>
+              </div>`
+    },
   },
   m: {
     tool:        'margin',
     icon:        Icons.margin,
-    label:       '<span><u>M</u>argin</span>',
-    description: 'Adjust spacing outside',
-    instruction: `<div table>
-                    <div>
-                      <b>+ Margin:</b>
-                      <span>◀ ▶ ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>- Margin:</b>
-                      <span>${altKey} + ◀ ▶ ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>All Sides:</b>
-                      <span>${metaKey} +  ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Trainer:</b>
-                      <span>shift + /</span>
-                    </div>
-                  </div>`,
+    get label() { return t('margin.label') },
+    get description() { return t('margin.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('margin.add_margin')}</b>
+                  <span>${t('margin.arrows')}</span>
+                </div>
+                <div>
+                  <b>${t('margin.subtract_margin')}</b>
+                  <span>${altKey} + ${t('margin.arrows')}</span>
+                </div>
+                <div>
+                  <b>${t('margin.all_sides')}</b>
+                  <span>${metaKey} + ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('margin.trainer')}</b>
+                  <span>${t('margin.shift_slash')}</span>
+                </div>
+              </div>`
+    },
   },
   p: {
     tool:        'padding',
     icon:        Icons.padding,
-    label:       '<span><u>P</u>adding</span>',
-    description: `Adjust spacing within`,
-    instruction: `<div table>
-                    <div>
-                      <b>+ Padding:</b>
-                      <span>◀ ▶ ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>- Padding:</b>
-                      <span>${altKey} + ◀ ▶ ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>All Sides:</b>
-                      <span>${metaKey} +  ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Trainer:</b>
-                      <span>shift + /</span>
-                    </div>
-                  </div>`
+    get label() { return t('padding.label') },
+    get description() { return t('padding.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('padding.add_padding')}</b>
+                  <span>${t('margin.arrows')}</span>
+                </div>
+                <div>
+                  <b>${t('padding.subtract_padding')}</b>
+                  <span>${altKey} + ${t('margin.arrows')}</span>
+                </div>
+                <div>
+                  <b>${t('padding.all_sides')}</b>
+                  <span>${metaKey} + ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('padding.trainer')}</b>
+                  <span>${t('margin.shift_slash')}</span>
+                </div>
+              </div>`
+    },
   },
-  // b: {
-  //   tool:        'border',
-  //   icon:        Icons.border,
-  //   label:       'Border',
-  //   description: ''
-  // },
   a: {
     tool:        'align',
     icon:        Icons.align,
-    label:       '<span>Flexbox <u>A</u>lign</span>',
-    description: `Adjust flexbox layout features`,
-    instruction: `<div table>
-                    <div>
-                      <b>Rows:</b>
-                      <span>${metaKey} + ▼</span>
-                    </div>
-                    <div>
-                      <b>Columns:</b>
-                      <span>${metaKey} + ▶</span>
-                    </div>
-                    <div>
-                      <b>Alignment:</b>
-                      <span>◀ ▶ ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Distribution:</b>
-                      <span>Shift + ◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Order:</b>
-                      <span>${metaKey} + shift + ◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Wrapping:</b>
-                      <span>${metaKey} + shift + ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Trainer:</b>
-                      <span>shift + /</span>
-                    </div>
-                  </div>`,
+    get label() { return t('align.label') },
+    get description() { return t('align.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('align.rows')}</b>
+                  <span>${metaKey} + ▼</span>
+                </div>
+                <div>
+                  <b>${t('align.columns')}</b>
+                  <span>${metaKey} + ▶</span>
+                </div>
+                <div>
+                  <b>${t('align.alignment')}</b>
+                  <span>${t('margin.arrows')}</span>
+                </div>
+                <div>
+                  <b>${t('align.distribution')}</b>
+                  <span>${t('align.shift_arrows')}</span>
+                </div>
+                <div>
+                  <b>${t('align.order')}</b>
+                  <span>${metaKey} + shift + ◀ ▶</span>
+                </div>
+                <div>
+                  <b>${t('align.wrapping')}</b>
+                  <span>${metaKey} + shift + ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('align.trainer')}</b>
+                  <span>${t('margin.shift_slash')}</span>
+                </div>
+              </div>`
+    },
   },
   v: {
     tool:        'move',
     icon:        Icons.move,
-    label:       '<span>Mo<u>v</u>e</span>',
-    description: 'Change the position of elements',
-    instruction: `<div table>
-                    <div>
-                      <b>Lateral:</b>
-                      <span>click container ⇒ drag child</span>
-                    </div>
-                    <div>
-                      <b>Lateral:</b>
-                      <span>◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Out and above:</b>
-                      <span>▲</span>
-                    </div>
-                    <div>
-                      <b>Down+in, out+under:</b>
-                      <span>▼</span>
-                    </div>
-                    <div>
-                      <b>Trainer:</b>
-                      <span>shift + /</span>
-                    </div>
-                  </div>`,
+    get label() { return t('move.label') },
+    get description() { return t('move.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('move.lateral_container')}</b>
+                  <span>${t('move.lateral')}</span>
+                </div>
+                <div>
+                  <b>${t('move.lateral_container')}</b>
+                  <span>◀ ▶</span>
+                </div>
+                <div>
+                  <b>${t('move.out_above')}</b>
+                  <span>▲</span>
+                </div>
+                <div>
+                  <b>${t('move.down_in')}</b>
+                  <span>▼</span>
+                </div>
+                <div>
+                  <b>${t('margin.trainer')}</b>
+                  <span>${t('margin.shift_slash')}</span>
+                </div>
+              </div>`
+    },
   },
   h: {
     tool:        'hueshift',
     icon:        Icons.hueshift,
-    label:       '<span><u>H</u>ue Shift</span>',
-    description: ``,
-    instruction: `<div table>
-                    <div>
-                      <b>Saturation:</b>
-                      <span>◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Brightness:</b>
-                      <span>▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Hue:</b>
-                      <span>${metaKey} +  ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Opacity:</b>
-                      <span>${metaKey} +  ◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Trainer:</b>
-                      <span>shift + /</span>
-                    </div>
-                  </div>`,
+    get label() { return t('hueshift.label') },
+    get description() { return '' },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('hueshift.saturation')}</b>
+                  <span>◀ ▶</span>
+                </div>
+                <div>
+                  <b>${t('hueshift.brightness')}</b>
+                  <span>▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('hueshift.hue')}</b>
+                  <span>${metaKey} + ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('hueshift.opacity')}</b>
+                  <span>${metaKey} + ◀ ▶</span>
+                </div>
+                <div>
+                  <b>${t('margin.trainer')}</b>
+                  <span>${t('margin.shift_slash')}</span>
+                </div>
+              </div>`
+    },
   },
   d: {
     tool:        'boxshadow',
     icon:        Icons.boxshadow,
-    label:       '<span>Box Sha<u>d</u>ows</span>',
-    description: ``,
-    instruction: `<div table>
-                    <div>
-                      <b>X/Y Position:</b>
-                      <span>◀ ▶ ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Blur:</b>
-                      <span>${altKey} + ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Spread:</b>
-                      <span>${altKey} + ◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Opacity:</b>
-                      <span>${metaKey} + ◀ ▶</span>
-                    </div>
-                  </div>`,
+    get label() { return t('boxshadow.label') },
+    get description() { return '' },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('boxshadow.xy_position')}</b>
+                  <span>◀ ▶ ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('boxshadow.blur')}</b>
+                  <span>${altKey} + ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('boxshadow.spread')}</b>
+                  <span>${altKey} + ◀ ▶</span>
+                </div>
+                <div>
+                  <b>${t('boxshadow.opacity')}</b>
+                  <span>${metaKey} + ◀ ▶</span>
+                </div>
+              </div>`
+    },
   },
-  // t: {
-  //   tool:        'transform',
-  //   icon:        Icons.transform,
-  //   label:       '3D Transform',
-  //   description: ''
-  // },
   f: {
     tool:        'font',
     icon:        Icons.font,
-    label:       '<span><u>F</u>ont Styles</span>',
-    description: '',
-    instruction: `<div table>
-                    <div>
-                      <b>Size:</b>
-                      <span>▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Alignment:</b>
-                      <span>◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Leading:</b>
-                      <span>Shift + ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Letter-spacing:</b>
-                      <span>Shift + ◀ ▶</span>
-                    </div>
-                    <div>
-                      <b>Weight:</b>
-                      <span>${metaKey} + ▲ ▼</span>
-                    </div>
-                    <div>
-                      <b>Trainer:</b>
-                      <span>shift + /</span>
-                    </div>
-                  </div>`,
+    get label() { return t('font.label') },
+    get description() { return '' },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('font.size')}</b>
+                  <span>▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('font.alignment')}</b>
+                  <span>◀ ▶</span>
+                </div>
+                <div>
+                  <b>${t('font.leading')}</b>
+                  <span>Shift + ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('font.letter_spacing')}</b>
+                  <span>Shift + ◀ ▶</span>
+                </div>
+                <div>
+                  <b>${t('font.weight')}</b>
+                  <span>${metaKey} + ▲ ▼</span>
+                </div>
+                <div>
+                  <b>${t('margin.trainer')}</b>
+                  <span>${t('margin.shift_slash')}</span>
+                </div>
+              </div>`
+    },
   },
   e: {
     tool:        'text',
     icon:        Icons.text,
-    label:       '<span><u>E</u>dit Text</span>',
-    description: 'Just <b>Double click</b> any text on the page',
-    instruction: '',
+    get label() { return t('text.label') },
+    get description() { return t('text.description') },
+    get instruction() { return '' },
   },
-  // c: {
-  //   tool:        'screenshot',
-  //   icon:        Icons.camera,
-  //   label:       'Screenshot',
-  //   description: 'Screenshot selected elements or the entire page'
-  // },
   s: {
     tool:        'search',
     icon:        Icons.search,
-    label:       '<span><u>S</u>earch</span>',
-    description: 'Select elements programatically by searching for them or use built in plugins with special commands',
-    instruction: '',
+    get label() { return t('search.label') },
+    get description() { return t('search.description') },
+    get instruction() { return '' },
   },
   n: {
     tool:        'language',
-    icon:        Icons.language,
-    label:       '<span><u>N</u>Language</span>',
-    description: 'Switch between English and Chinese languages',
-    instruction: `<div table>
-                    <div>
-                      <b>English:</b>
-                      <span>Click to switch</span>
-                    </div>
-                    <div>
-                      <b>中文:</b>
-                      <span>点击切换</span>
-                    </div>
-                  </div>`,
+    get icon() { 
+      // 根据当前语言显示对应图标
+      return getLanguage() === 'zh' ? Icons.languageCn : Icons.languageEn 
+    },
+    get label() { return t('language.label') },
+    get description() { return t('language.description') },
+    get instruction() { 
+      return `<div table>
+                <div>
+                  <b>${t('language.english')}</b>
+                  <span>${t('language.click_switch')}</span>
+                </div>
+                <div>
+                  <b>${t('language.chinese')}</b>
+                  <span>${t('language.dianji_qiehuan')}</span>
+                </div>
+              </div>`
+    },
   },
 }

@@ -29,6 +29,8 @@ import {
   schemeRule
 } from '../../utilities/'
 
+import { toggleLanguage, getLanguage } from '../../utilities/i18n'
+
 export default class VisBug extends HTMLElement {
   constructor() {
     super()
@@ -39,6 +41,7 @@ export default class VisBug extends HTMLElement {
       this.$shadow,
       VisBugStyles, VisBugLightStyles, VisBugDarkStyles
     )
+    this.handleLanguageChange = this.handleLanguageChange.bind(this)
   }
 
   static get observedAttributes() {
@@ -56,6 +59,9 @@ export default class VisBug extends HTMLElement {
     provideSelectorEngine(this.selectorEngine)
 
     this.toolSelected($('[data-tool="guides"]', this.$shadow)[0])
+    
+    // 监听语言变化事件
+    document.addEventListener('languageChanged', this.handleLanguageChange)
   }
 
   disconnectedCallback() {
@@ -66,6 +72,14 @@ export default class VisBug extends HTMLElement {
       Object.keys(this.toolbar_model).reduce((events, key) =>
         events += ',' + key, ''))
     hotkeys.unbind(`${metaKey}+/`)
+    
+    // 移除语言变化监听
+    document.removeEventListener('languageChanged', this.handleLanguageChange)
+  }
+
+  handleLanguageChange() {
+    // 重新渲染工具栏
+    this.setup()
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
@@ -272,15 +286,8 @@ export default class VisBug extends HTMLElement {
   }
 
   language() {
-    // 获取当前语言
-    const currentLang = localStorage.getItem('visbug_lang') || 'en'
-    const newLang = currentLang === 'en' ? 'zh' : 'en'
-    
-    // 保存新语言
-    localStorage.setItem('visbug_lang', newLang)
-    
-    // 触发语言更改事件
-    document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: newLang } }))
+    // 切换语言
+    toggleLanguage()
     
     // 隐藏工具提示
     this.deactivate_feature = () => {}
