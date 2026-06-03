@@ -78,8 +78,21 @@ export default class VisBug extends HTMLElement {
   }
 
   handleLanguageChange() {
-    // 重新渲染工具栏
+    // 保存当前选中的工具名称
+    const currentTool = this.active_tool ? this.active_tool.dataset.tool : 'guides'
+    
+    // 移除之前的快捷键事件监听器
+    hotkeys.unbind(
+      Object.keys(this.toolbar_model).reduce((events, key) =>
+        events += ',' + key, ''))
+    hotkeys.unbind(`${metaKey}+/,${metaKey}+.`)
+    
+    // 重新渲染工具栏（render 方法会根据字符串形式的 active_tool 正确设置选中状态）
+    this.active_tool = currentTool
     this.setup()
+    
+    // 将 active_tool 设置回 DOM 元素
+    this.active_tool = $(`[data-tool="${currentTool}"]`, this.$shadow)[0]
   }
 
   get languageIcon() {
@@ -187,12 +200,17 @@ export default class VisBug extends HTMLElement {
   }
 
   render() {
+    // 获取当前选中的工具（如果 active_tool 是字符串，直接使用；否则从 DOM 元素获取）
+    const currentTool = typeof this.active_tool === 'string' 
+      ? this.active_tool 
+      : (this.active_tool ? this.active_tool.dataset.tool : 'guides')
+    
     return `
       <visbug-hotkeys></visbug-hotkeys>
       <ol constructible-support="${constructibleStylesheetSupport ? 'false':'true'}">
         ${Object.entries(this.toolbar_model).reduce((list, [key, tool]) => `
           ${list}
-          <li aria-label="${tool.label} Tool" aria-description="${tool.description}" aria-hotkey="${key}" data-tool="${tool.tool}" data-active="${key == 'g'}">
+          <li aria-label="${tool.label} Tool" aria-description="${tool.description}" aria-hotkey="${key}" data-tool="${tool.tool}" ${tool.tool == currentTool ? 'data-active="true"' : ''}>
             ${tool.icon}
             ${this.demoTip({key, ...tool})}
           </li>
@@ -211,7 +229,7 @@ export default class VisBug extends HTMLElement {
           <input type="color">
           ${Icons.color_border}
         </li>
-        <li class="color" id="language" data-tool="language" aria-label="Language" aria-description="Switch between English and Chinese">
+        <li class="color" id="language" aria-label="Language" aria-description="Switch between English and Chinese">
           ${this.languageIcon}
         </li>
       </ol>

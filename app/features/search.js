@@ -4,39 +4,49 @@ import { querySelectorAllDeep } from 'query-selector-shadow-dom'
 import { PluginRegistry, PluginHints } from '../plugins/_registry'
 import { notList } from '../utilities'
 import { isFirefox } from '../utilities/cross-browser.js'
+import { t } from '../utilities/i18n'
 
 let SelectorEngine
 
 // create input
 const search_base = document.createElement('div')
 search_base.classList.add('search')
-search_base.innerHTML = `
-  <input list="visbug-plugins" type="search" placeholder="ex: images, .btn, button, text, ..."/>
-  <datalist id="visbug-plugins">
-    ${isFirefox > 0
-      ?  `<option value="h1, h2, h3, .get-multiple">
-          <option value="nav > a:first-child">
-          <option value="#get-by-id">
-          <option value=".get-by.class-names">
-          <option value="images">
-          <option value="text">
-          <hr>`
 
-      :  `<option value="h1, h2, h3, .get-multiple">example</option>
-          <option value="nav > a:first-child">example</option>
-          <option value="#get-by-id">example</option>
-          <option value=".get-by.class-names">example</option>
-          <option value="images">alias</option>
-          <option value="text">alias</option>
-          <hr>`}
+const renderSearch = () => {
+  search_base.innerHTML = `
+    <input list="visbug-plugins" type="search" placeholder="${t('search.placeholder')}"/>
+    <datalist id="visbug-plugins">
+      ${isFirefox > 0
+        ?  `<option value="h1, h2, h3, .get-multiple">
+            <option value="nav > a:first-child">
+            <option value="#get-by-id">
+            <option value=".get-by.class-names">
+            <option value="images">
+            <option value="text">
+            <hr>`
 
-    ${PluginHints.reduce((options, hint) =>
-      options += isFirefox > 0
-        ? `<option value="${hint.command}">`
-        : `<option value="${hint.command}">${hint.description}`
-    , '')}
-  </datalist>
-`
+        :  `<option value="h1, h2, h3, .get-multiple">${t('search.example')}</option>
+            <option value="nav > a:first-child">${t('search.example')}</option>
+            <option value="#get-by-id">${t('search.example')}</option>
+            <option value=".get-by.class-names">${t('search.example')}</option>
+            <option value="images">${t('search.alias')}</option>
+            <option value="text">${t('search.alias')}</option>
+            <hr>`}
+
+      ${PluginHints.reduce((options, hint) =>
+        options += isFirefox > 0
+          ? `<option value="${hint.command}">`
+          : `<option value="${hint.command}">${hint.description}`
+      , '')}
+    </datalist>
+  `
+}
+
+// 初始渲染
+renderSearch()
+
+// 监听语言变化
+document.addEventListener('languageChanged', renderSearch)
 
 const search        = $(search_base)
 const searchInput   = $('input', search_base)

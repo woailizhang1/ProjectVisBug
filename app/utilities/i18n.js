@@ -101,6 +101,9 @@ const translations = {
 
     'search.label': '<span><u>S</u>earch</span>',
     'search.description': 'Select elements programatically by searching for them or use built in plugins with special commands',
+    'search.placeholder': 'ex: images, .btn, button, text, ...',
+    'search.example': 'example',
+    'search.alias': 'alias',
 
     'language.label': '<span><u>N</u>Language</span>',
     'language.description': 'Switch between English and Chinese languages',
@@ -108,6 +111,14 @@ const translations = {
     'language.chinese': '中文:',
     'language.click_switch': 'Click to switch',
     'language.dianji_qiehuan': '点击切换',
+
+    // Color buttons
+    'color.foreground': 'Text',
+    'color.foreground_description': 'Change the text color',
+    'color.background': 'Background or Fill',
+    'color.background_description': 'Change the background color or fill of svg',
+    'color.border': 'Border or Stroke',
+    'color.border_description': 'Change the border color or stroke of svg',
   },
 
   zh: {
@@ -211,6 +222,9 @@ const translations = {
 
     'search.label': '<span><u>S</u>earch（搜索）</span>',
     'search.description': '通过搜索选择元素，或使用带有特殊命令的内置插件',
+    'search.placeholder': '例如：images、.btn、button、text、...',
+    'search.example': '示例',
+    'search.alias': '别名',
 
     'language.label': '<span><u>N</u>Language（语言）</span>',
     'language.description': '切换中英文语言',
@@ -272,3 +286,6 @@ export function initLanguage() {
   }
   return currentLang
 }
+
+// 自动初始化语言（模块加载时执行）
+initLanguage()
