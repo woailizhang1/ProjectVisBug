@@ -24,6 +24,10 @@ const translations = {
 
     'accessibility.label': 'Accessibility',
     'accessibility.description': 'Inspect attributes & contrast compliance',
+    'accessibility.foreground': 'Foreground',
+    'accessibility.background': 'Background',
+    'accessibility.foreground_matches': 'Foreground matches background',
+    'accessibility.wcag_compliance': 'WCAG Compliance',
 
     'position.label': 'Position',
     'position.description': 'Grab and position elements anywhere',
@@ -124,12 +128,16 @@ const translations = {
     'inspector.pin_it': '固定：',
     'inspector.pin_many': '固定多个：',
     'inspector.position_it': '定位：',
-    'inspector.click_drag': '点击并拖动标题区域',
+    'inspector.click_drag': '拖动标题移动面板',
     'inspector.click': '点击',
     'inspector.shift_click': 'shift+点击',
 
     'accessibility.label': 'Accessibility（无障碍）',
     'accessibility.description': '检查属性和对比度合规性',
+    'accessibility.foreground': '前景色',
+    'accessibility.background': '背景色',
+    'accessibility.foreground_matches': '前景色与背景色相同',
+    'accessibility.wcag_compliance': 'WCAG 合规性',
 
     'position.label': 'Position（位置）',
     'position.description': '抓取并定位元素到任何位置',

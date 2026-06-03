@@ -82,6 +82,11 @@ export default class VisBug extends HTMLElement {
     this.setup()
   }
 
+  get languageIcon() {
+    // 根据当前语言显示对应图标
+    return getLanguage() === 'zh' ? Icons.languageCn : Icons.languageEn
+  }
+
   attributeChangedCallback(name, oldValue, newValue) {
     if (name === 'color-scheme')
       this.applyScheme(newValue)
@@ -119,6 +124,15 @@ export default class VisBug extends HTMLElement {
         clickEvent: clickEvent
       })
     })
+
+    // 语言切换按钮点击事件
+    const languageBtn = this.$shadow.querySelector('#language')
+    if (languageBtn) {
+      languageBtn.addEventListener('click', (e) => {
+        e.stopPropagation()
+        toggleLanguage()
+      })
+    }
 
     draggable({
       el:this,
@@ -196,6 +210,9 @@ export default class VisBug extends HTMLElement {
         <li class="color" id="border" aria-label="Border or Stroke" aria-description="Change the border color or stroke of svg">
           <input type="color">
           ${Icons.color_border}
+        </li>
+        <li class="color" id="language" data-tool="language" aria-label="Language" aria-description="Switch between English and Chinese">
+          ${this.languageIcon}
         </li>
       </ol>
     `

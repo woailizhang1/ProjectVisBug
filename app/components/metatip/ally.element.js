@@ -4,6 +4,7 @@ import { preferredNotation } from '../../features/color.js'
 import { draggable } from '../../features/'
 import { getStyle, getComputedBackgroundColor } from '../../utilities'
 import { contrast_color } from '../../utilities'
+import { t } from '../../utilities/i18n'
 
 export class Ally extends Metatip {
   constructor() {
@@ -59,7 +60,7 @@ export class Ally extends Metatip {
           <div color-swatches>
             <span color-swatch style="background-color:${foreground};" tabindex="0">
               <small style="color:${contrastingForegroundColor};">
-                Foreground
+                ${t('accessibility.foreground')}
               </small>
               <span style="color:${contrastingForegroundColor};">
                 ${preferredNotation(foreground, colormode)}
@@ -67,7 +68,7 @@ export class Ally extends Metatip {
             </span>
             <span color-swatch style="background-color:${background};" tabindex="0">
               <small style="color:${contrastingBackgroundColor};">
-                Background
+                ${t('accessibility.background')}
               </small>
               <span style="color:${contrastingBackgroundColor};">
                 ${preferredNotation(background, colormode)}

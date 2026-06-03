@@ -326,25 +326,4 @@ export const VisBugModel = {
     get description() { return t('search.description') },
     get instruction() { return '' },
   },
-  n: {
-    tool:        'language',
-    get icon() { 
-      // 根据当前语言显示对应图标
-      return getLanguage() === 'zh' ? Icons.languageCn : Icons.languageEn 
-    },
-    get label() { return t('language.label') },
-    get description() { return t('language.description') },
-    get instruction() { 
-      return `<div table>
-                <div>
-                  <b>${t('language.english')}</b>
-                  <span>${t('language.click_switch')}</span>
-                </div>
-                <div>
-                  <b>${t('language.chinese')}</b>
-                  <span>${t('language.dianji_qiehuan')}</span>
-                </div>
-              </div>`
-    },
-  },
 }

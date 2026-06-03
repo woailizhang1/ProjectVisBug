@@ -7,6 +7,7 @@ import {
   getA11ys, getWCAG2TextSize, getComputedBackgroundColor,
   deepElementFromPoint, onRemove, contrast_color
 } from '../utilities/'
+import { t } from '../utilities/i18n'
 
 const state = {
   active: {
@@ -204,11 +205,11 @@ const determineColorContrast = el => {
     apca_compliance = true
 
   return foreground === background
-    ? `<div contrast-compliance>Foreground matches background</div>`
+    ? `<div contrast-compliance>${t('accessibility.foreground_matches')}</div>`
     : `
         <div contrast-compliance>
           <span compliance>
-            <span title>WCAG Compliance</span>
+            <span title>${t('accessibility.wcag_compliance')}</span>
             <div>
               <span>
                 <span value score pass="${aa_contrast ? 'true' : 'false'}">${aa_contrast ? pass_icon : fail_icon}</span>
