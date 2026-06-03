@@ -318,4 +318,20 @@ export const VisBugModel = {
     description: 'Select elements programatically by searching for them or use built in plugins with special commands',
     instruction: '',
   },
+  n: {
+    tool:        'language',
+    icon:        Icons.language,
+    label:       '<span><u>N</u>Language</span>',
+    description: 'Switch between English and Chinese languages',
+    instruction: `<div table>
+                    <div>
+                      <b>English:</b>
+                      <span>Click to switch</span>
+                    </div>
+                    <div>
+                      <b>中文:</b>
+                      <span>点击切换</span>
+                    </div>
+                  </div>`,
+  },
 }

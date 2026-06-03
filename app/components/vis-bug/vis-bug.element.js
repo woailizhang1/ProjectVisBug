@@ -271,6 +271,21 @@ export default class VisBug extends HTMLElement {
     }
   }
 
+  language() {
+    // 获取当前语言
+    const currentLang = localStorage.getItem('visbug_lang') || 'en'
+    const newLang = currentLang === 'en' ? 'zh' : 'en'
+    
+    // 保存新语言
+    localStorage.setItem('visbug_lang', newLang)
+    
+    // 触发语言更改事件
+    document.dispatchEvent(new CustomEvent('languageChanged', { detail: { lang: newLang } }))
+    
+    // 隐藏工具提示
+    this.deactivate_feature = () => {}
+  }
+
   execCommand(command) {
     const query = `/${command}`
 
